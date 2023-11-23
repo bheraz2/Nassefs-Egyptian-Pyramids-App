@@ -17,4 +17,12 @@ public class Pyramid {
     name = pyramidName;
     contributors = pyramidContributors;
   }
+
+  public void print(){
+    System.out.println("Pyramid ID: " + id);
+    System.out.println("Name: " + name);
+    System.out.println("Contributors: ");
+
+    for (String contributor )
+  }
 }
