@@ -6,10 +6,45 @@ import org.json.simple.*;
 
 public class App 
 {
-    /*public static void main( String[] args )
+    protected Pharaoh[] pharaohArray;
+    protected Pyramid[] pyramidArray;
+    public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-    }*/
+       App app = new App();
+    app.start();
+    }
+
+    public App() {
+        // read egyptian pharaohs
+        String pharaohFile =
+          "/Users/jerom/Documents/GitHub/class-java/egyptian-pyramids/demo/src/main/java/com/egyptianExample/pharaoh.json";
+        JSONArray pharaohJSONArray = JSONFile.readArray(pharaohFile);
+    
+        // create and intialize the pharaoh array
+        initializePharaoh(pharaohJSONArray);
+    
+        // read pyramids
+        String pyramidFile =
+          "/Users/jerom/Documents/GitHub/class-java/egyptian-pyramids/demo/src/main/java/com/egyptian/pyramid.json";
+        JSONArray pyramidJSONArray = JSONFile.readArray(pyramidFile);
+    
+        // create and initialize the pyramid array
+        initializePyramid(pyramidJSONArray);
+    
+      }
+
+    public void start(){
+        Scanner scan = new Scanner(System.in);
+        char command = '_';
+
+        while (command != 'q'){
+            printMenu();
+            System.out.println("Enter a command: ");
+            command = menuGetCommand(scan);
+            executeCommand(scan, command);
+
+        }
+    }
     
     //Displays the Menu
     public static void printMenu(){
@@ -33,10 +68,18 @@ public class App
 
     private Boolean executeCommand(Scanner scan, Character command) {
         Boolean success = true;
-    
+        
         switch (command) {
           case '1':
-            //printAllPharaoh();
+            printAllPharaoh();
+            break;
+          case '2':
+            break;
+          case '3':
+            break;
+          case '4':
+            break;
+          case '5':
             break;
           case 'q':
             System.out.println("Thank you for using Nassef's Egyptian Pyramid App!");
@@ -47,6 +90,27 @@ public class App
         }
     
         return success;
+      }
+
+      private void printAllPharaoh() {
+        for (int i = 0; i < pharaohArray.length; i++) {
+          printMenuLine();
+          pharaohArray[i].print();
+          printMenuLine();
+        }
+      }
+
+      private static Character menuGetCommand(Scanner scan) {
+        Character command = '_';
+    
+        String rawInput = scan.nextLine();
+    
+        if (rawInput.length() > 0) {
+          rawInput = rawInput.toLowerCase();
+          command = rawInput.charAt(0);
+        }
+    
+        return command;
       }
 
 }
