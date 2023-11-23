@@ -10,7 +10,8 @@ public class App
     {
         System.out.println( "Hello World!" );
     }*/
-
+    
+    //Displays the Menu
     public static void printMenu(){
        System.out.println("----------------------------------------------------------");
        System.out.println("Nassef's Egyptian Pyramids App");
@@ -24,11 +25,28 @@ public class App
        printMenuCommand('5',"Displays a list of requested pyramids");
        printMenuCommand('q',"Quit");
 
-
-
     }
 
     public static void printMenuCommand(Character command, String desc){
         System.out.printf("%s\t%s\n",command, desc);
     }
+
+    private Boolean executeCommand(Scanner scan, Character command) {
+        Boolean success = true;
+    
+        switch (command) {
+          case '1':
+            //printAllPharaoh();
+            break;
+          case 'q':
+            System.out.println("Thank you for using Nassef's Egyptian Pyramid App!");
+            break;
+          default:
+            System.out.println("ERROR: Unknown commmand");
+            success = false;
+        }
+    
+        return success;
+      }
+
 }
