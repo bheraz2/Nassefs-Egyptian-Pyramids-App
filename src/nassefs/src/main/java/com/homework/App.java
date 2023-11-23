@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.util.*;
 import org.json.simple.*;
 
-
 public class App 
 {
     private HashMap<Integer, Pharaoh> pharaohMap;
@@ -21,20 +20,26 @@ public class App
         pyramidMap = new HashMap<>();
 
         // read egyptian pharaohs
-        String pharaohFile ="/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/main/java/com/test/lava/homework/pharaoh.json";
+        String pharaohFile ="/Users/bryanheraz/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/main/java/com/test/lava/homework/pharaoh.json";
         JSONArray pharaohJSONArray = JSONFile.readArray(pharaohFile);
     
         // create and intialize the pharaoh array
         initializePharaoh(pharaohJSONArray);
     
         // read pyramids
-        String pyramidFile = "/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/main/java/com/test/lava/homework/pyramid.json";
+        String pyramidFile = "/Users/bryanheraz/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/main/java/com/test/lava/homework/pyramid.json";
         JSONArray pyramidJSONArray = JSONFile.readArray(pyramidFile);
     
         // create and initialize the pyramid array
         initializePyramid(pyramidJSONArray);
     
       }
+
+    private void initializePyramid(JSONArray pyramidJSONArray) {
+    }
+
+    private void initializePharaoh(JSONArray pharaohJSONArray) {
+    }
 
     public void start(){
         Scanner scan = new Scanner(System.in);
@@ -96,9 +101,9 @@ public class App
       }
 
       private void printAllPharaoh() {
-        for (int i = 0; i < pharaohArray.length; i++) {
+        for (Pharaoh pharaoh : pharaohMap.values()) {
           System.out.println("----------------------------------------------------------");
-          pharaohArray[i].print();
+          pharaoh.print();
           System.out.println("----------------------------------------------------------");
       
         }

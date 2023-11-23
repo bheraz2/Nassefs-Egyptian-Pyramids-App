@@ -1,8 +1,9 @@
 package com.homework;
 
-import java.io.*;
-import org.json.simple.*;
-import org.json.simple.parser.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.io.FileNotFoundException;
 
 public class JSONFile {
 
@@ -19,8 +20,12 @@ public class JSONFile {
 
     try (FileReader reader = new FileReader(fileName)) {
       Object obj = jsonParser.parse(reader);
-
-      data = (JSONArray) obj;
+      if (obj instanceof JSON Array){
+         data = (JSONArray) obj;
+      }else{
+        System.out.println("Error: The file does not contain a JSON Array");
+      }
+      
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {
