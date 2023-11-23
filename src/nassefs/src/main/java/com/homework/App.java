@@ -4,10 +4,11 @@ import java.util.Scanner;
 import java.util.*;
 import org.json.simple.*;
 
+
 public class App 
 {
-    protected Pharaoh[] pharaohArray;
-    protected Pyramid[] pyramidArray;
+    private HashMap<Integer, Pharaoh> pharaohMap;
+    private HashMap<Integer, Pyramid> pyramidMap;
     public static void main( String[] args )
     {
        App app = new App();
@@ -15,17 +16,19 @@ public class App
     }
 
     public App() {
+        //Initialize the HashMaps
+        pharaohMap = new HashMap<>();
+        pyramidMap = new HashMap<>();
+
         // read egyptian pharaohs
-        String pharaohFile =
-          "/Users/jerom/Documents/GitHub/class-java/egyptian-pyramids/demo/src/main/java/com/egyptianExample/pharaoh.json";
+        String pharaohFile ="/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/main/java/com/test/lava/homework/pharaoh.json";
         JSONArray pharaohJSONArray = JSONFile.readArray(pharaohFile);
     
         // create and intialize the pharaoh array
         initializePharaoh(pharaohJSONArray);
     
         // read pyramids
-        String pyramidFile =
-          "/Users/jerom/Documents/GitHub/class-java/egyptian-pyramids/demo/src/main/java/com/egyptian/pyramid.json";
+        String pyramidFile = "/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/main/java/com/test/lava/homework/pyramid.json";
         JSONArray pyramidJSONArray = JSONFile.readArray(pyramidFile);
     
         // create and initialize the pyramid array
@@ -94,10 +97,15 @@ public class App
 
       private void printAllPharaoh() {
         for (int i = 0; i < pharaohArray.length; i++) {
-          printMenuLine();
+          System.out.println("----------------------------------------------------------");
           pharaohArray[i].print();
-          printMenuLine();
+          System.out.println("----------------------------------------------------------");
+      
         }
+      }
+
+      private void printAllPyramids(){
+
       }
 
       private static Character menuGetCommand(Scanner scan) {
