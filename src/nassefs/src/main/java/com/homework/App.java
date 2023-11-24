@@ -1,7 +1,7 @@
 package com.homework;
 
 import java.util.*;
-import org.json.simple.*;
+
 
 public class App 
 {
@@ -59,14 +59,14 @@ public class App
        System.out.println("Nassef's Egyptian Pyramids App");
        System.out.println("----------------------------------------------------------");
        System.out.println("Command\tDescription");
-       System.out.println("-------\t----------------------------------");
+       System.out.println("-------\t-------------------------------------------------");
        printMenuCommand('1',"List of all pharaohs");
        printMenuCommand('2',"Display a specific Egyptian pharaoh");
        printMenuCommand('3',"List of all pyramids");
        printMenuCommand('4',"Display a specific pyramid");
        printMenuCommand('5',"Displays a list of requested pyramids");
        printMenuCommand('q',"Quit");
-
+       System.out.println("-------\t-------------------------------------------------");
     }
 
     public static void printMenuCommand(Character command, String desc){
@@ -156,7 +156,7 @@ public class App
         //displays a list of requested pyramids
         private void displayRequestedPyramids(Scanner scan){
             //creating a set for requested pyramids
-            Set<Integer> requestedPyramidIDS = new HashSet<>;
+            Set<Integer> requestedPyramidIDS = new HashSet<>();
 
             System.out.println("----------------------------------------------------------");
             for (Integer pyramidID : requestedPyramidIDS){
