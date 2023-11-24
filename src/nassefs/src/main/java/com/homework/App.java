@@ -1,6 +1,5 @@
 package com.homework;
 
-import java.util.Scanner;
 import java.util.*;
 import org.json.simple.*;
 
@@ -134,6 +133,22 @@ public class App
             System.out.println("Pharaoh with ID" + pharaohID + "not found.");
         }
       }
+
+         private void displaySpecificPyramid(Scanner scan){
+            System.out.println("Enter the ID of the pyramid: ");
+            int pyramidID = scan.nextInt();
+
+            if(pyramidMap.containsKey(pyramidID)){
+                Pyramid specificPyramid = pyramidMap.get(pyramidID);
+                System.out.println("----------------------------------------------------------");
+                specificPyramid.print();
+                 System.out.println("----------------------------------------------------------");
+
+            }else{
+                System.out.println("Pyramid with ID" + pyramidID + "not found.");
+            }
+        }
+
 
       private static Character menuGetCommand(Scanner scan) {
         Character command = '_';
