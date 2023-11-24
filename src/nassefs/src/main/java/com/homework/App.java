@@ -87,9 +87,10 @@ public class App
             printAllPyramids();
             break;
           case '4':
-            
+             displaySpecificPyramid(scan);
             break;
           case '5':
+             displayRequestedPyramids(scan);
             break;
           case 'q':
             System.out.println("Thank you for using Nassef's Egyptian Pyramid App!");
@@ -102,6 +103,7 @@ public class App
         return success;
       }
 
+      //prints the list of all pharaohs
       private void printAllPharaoh() {
         for (Pharaoh pharaoh : pharaohMap.values()) {
           System.out.println("----------------------------------------------------------");
@@ -111,6 +113,7 @@ public class App
         }
       }
 
+      //print the list fo all pyramids
       private void printAllPyramids(){
          for(Pyramid pyramid : pyramidMap.values()){
             System.out.println("----------------------------------------------------------");
@@ -119,7 +122,7 @@ public class App
          }
       }
 
-      //To check if specific pharaoh ID exists in the map
+      //display a spcecific Pharaoh that was requested from the user
       private void displaySpecificPharaoh(Scanner scan){
         System.out.println("Enter the ID of the Pharaoh: ");
         int pharaohID = scan.nextInt();
@@ -134,6 +137,7 @@ public class App
         }
       }
 
+        //display a spcecific Pyramid that was requested from the user
          private void displaySpecificPyramid(Scanner scan){
             System.out.println("Enter the ID of the pyramid: ");
             int pyramidID = scan.nextInt();
@@ -148,6 +152,23 @@ public class App
                 System.out.println("Pyramid with ID" + pyramidID + "not found.");
             }
         }
+
+        //displays a list of requested pyramids
+        private void displayRequestedPyramids(Scanner scan){
+            //creating a set for requested pyramids
+            Set<Integer> requestedPyramidIDS = new HashSet<>;
+
+            System.out.println("----------------------------------------------------------");
+            for (Integer pyramidID : requestedPyramidIDS){
+                if (pyramidMap.containsKey(pyramidID)){
+                    Pyramid requestedPyramid = pyramidMap.get(pyramidID);
+                    requestedPyramid.print();
+                    System.out.println("----------------------------------------------------------");
+                }
+                }
+            }
+        
+
 
 
       private static Character menuGetCommand(Scanner scan) {
