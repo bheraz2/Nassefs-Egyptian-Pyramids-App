@@ -2,11 +2,16 @@ package com.homework;
 
 import java.util.*;
 
+import org.json.simple.JSONObject;
+
 
 public class App 
 {
     private HashMap<Integer, Pharaoh> pharaohMap;
     private HashMap<Integer, Pyramid> pyramidMap;
+
+    protected Pharaoh[] pharaohArray;
+    protected Pyramid[] pyramidArray;
     public static void main( String[] args )
     {
        App app = new App();
@@ -34,10 +39,29 @@ public class App
     
       }
 
-    private void initializePyramid(JSONArray pyramidJSONArray) {
+      
+      private void initializePyramid(JSONArray pyramidArray) {
+        pyramidMap = new HashMap<>();
+    
+        for (Object pyramidObj : pyramidArray) {
+            if (pyramidObj instanceof JSONObject) {
+                JSONObject pyramidJson = (JSONObject) pyramidObj;
+    
+                Integer id = Integer.parseInt(pyramidJson.get("id").toString());
+                String name = pyramidJson.get("name").toString();
+    
+                List<String> contributorsList = (List<String>) pyramidJson.get("contributors");
+                String[] contributors = contributorsList.toArray(new String[0]);
+    
+                Pyramid pyramid = new Pyramid(id, name, contributors);
+                pyramidMap.put(id, pyramid);
+            }
+        }
     }
+    
 
     private void initializePharaoh(JSONArray pharaohJSONArray) {
+
     }
 
     public void start(){
