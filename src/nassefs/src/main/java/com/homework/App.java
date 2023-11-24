@@ -82,10 +82,13 @@ public class App
             printAllPharaoh();
             break;
           case '2':
+            displaySpecificPharaoh(scan);
             break;
           case '3':
+            printAllPyramids();
             break;
           case '4':
+            
             break;
           case '5':
             break;
@@ -110,7 +113,26 @@ public class App
       }
 
       private void printAllPyramids(){
+         for(Pyramid pyramid : pyramidMap.values()){
+            System.out.println("----------------------------------------------------------");
+            pyramid.print();
+            System.out.println("----------------------------------------------------------"); 
+         }
+      }
 
+      //To check if specific pharaoh ID exists in the map
+      private void displaySpecificPharaoh(Scanner scan){
+        System.out.println("Enter the ID of the Pharaoh: ");
+        int pharaohID = scan.nextInt();
+
+        if (pharaohMap.containsKey(pharaohID)){
+            Pharaoh specificPharaoh = pharaohMap.get(pharaohID);
+            System.out.println("----------------------------------------------------------");
+            specificPharaoh.print();
+            System.out.println("----------------------------------------------------------");
+        }else{
+            System.out.println("Pharaoh with ID" + pharaohID + "not found.");
+        }
       }
 
       private static Character menuGetCommand(Scanner scan) {
