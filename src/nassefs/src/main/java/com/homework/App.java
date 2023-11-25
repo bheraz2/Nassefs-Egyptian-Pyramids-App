@@ -2,6 +2,7 @@ package com.homework;
 
 import java.util.*;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
@@ -24,14 +25,15 @@ public class App
         pyramidMap = new HashMap<>();
 
         // read egyptian pharaohs
-        String pharaohFile ="/Users/bryanheraz/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/main/java/com/test/lava/homework/pharaoh.json";
+        String pharaohFile ="/Users/bryanheraz/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/nassefs/src/main/java/com/homework/pharaoh.json";
         JSONArray pharaohJSONArray = JSONFile.readArray(pharaohFile);
+        
     
         // create and intialize the pharaoh array
         initializePharaoh(pharaohJSONArray);
     
         // read pyramids
-        String pyramidFile = "/Users/bryanheraz/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/main/java/com/test/lava/homework/pyramid.json";
+        String pyramidFile = "/Users/bryanheraz/Documents/GitHub/Nassefs-Egyptian-Pyramids-App/src/nassefs/src/main/java/com/homework/pyramid.json";
         JSONArray pyramidJSONArray = JSONFile.readArray(pyramidFile);
     
         // create and initialize the pyramid array
@@ -40,29 +42,62 @@ public class App
       }
 
       
-      private void initializePyramid(JSONArray pyramidArray) {
-        pyramidMap = new HashMap<>();
+      private void initializePharaoh(JSONArray pharaohJSONArray) {
+        if (pharaohJSONArray == null) {
+            System.out.println("Error: The pharaohJSONArray is null");
+            return;
+        }
     
-        for (Object pyramidObj : pyramidArray) {
-            if (pyramidObj instanceof JSONObject) {
-                JSONObject pyramidJson = (JSONObject) pyramidObj;
+        pharaohArray = new Pharaoh[pharaohJSONArray.size()];
     
-                Integer id = Integer.parseInt(pyramidJson.get("id").toString());
-                String name = pyramidJson.get("name").toString();
+        for (Object pharaohObj : pharaohJSONArray) {
+            if (pharaohObj instanceof JSONObject) {
+                JSONObject pharaohJson = (JSONObject) pharaohObj;
     
-                List<String> contributorsList = (List<String>) pyramidJson.get("contributors");
-                String[] contributors = contributorsList.toArray(new String[0]);
+                Integer id = Integer.parseInt(pharaohJson.get("id").toString());
+                String name = pharaohJson.get("name").toString();
+                String begin = pharaohJson.get("begin").toString();
+                String end = pharaohJson.get("end").toString();
+                Integer contribution = Integer.parseInt(pharaohJson.get("contribution").toString());
+                String hieroglyphic = pharaohJson.get("hieroglyphic").toString();
     
-                Pyramid pyramid = new Pyramid(id, name, contributors);
-                pyramidMap.put(id, pyramid);
+                Pharaoh pharaoh = new Pharaoh(id, name, begin, end, contribution, hieroglyphic);
+                pharaohMap.put(id, pharaoh);
             }
         }
     }
     
+    
 
-    private void initializePharaoh(JSONArray pharaohJSONArray) {
-
-    }
+        // initialize the pyramid array
+        private void initializePyramid(JSONArray pyramidJSONArray) {
+          // create array and hash map
+          pyramidArray = new Pyramid[pyramidJSONArray.size()];
+      
+          // initalize the array
+          for (int i = 0; i < pyramidJSONArray.size(); i++) {
+              // get the object
+              JSONObject o = (JSONObject) pyramidJSONArray.get(i);
+      
+              // parse the json object
+              Integer id = Integer.parseInt(((JSONObject) pyramidJSONArray.get(i)).get("id").toString());
+              String name = o.get("name").toString();
+              JSONArray contributorsJSONArray = (JSONArray) o.get("contributors");
+              
+              // Move the declaration outside the loop
+              String[] contributors = new String[contributorsJSONArray.size()];
+              
+              for (int j = 0; j < contributorsJSONArray.size(); j++) {
+                  String c = contributorsJSONArray.get(j).toString();
+                  contributors[j] = c;
+              }
+      
+              // add a new pyramid to array
+              Pyramid p = new Pyramid(id, name, contributors);
+              pyramidArray[i] = p;
+          }
+      }
+      
 
     public void start(){
         Scanner scan = new Scanner(System.in);
@@ -70,7 +105,6 @@ public class App
 
         while (command != 'q'){
             printMenu();
-            System.out.println("Enter a command: ");
             command = menuGetCommand(scan);
             executeCommand(scan, command);
 
@@ -198,7 +232,8 @@ public class App
       private static Character menuGetCommand(Scanner scan) {
         Character command = '_';
     
-        String rawInput = scan.nextLine();
+        System.out.print("Enter a command: ");
+        String rawInput = scan.nextLine().trim();
     
         if (rawInput.length() > 0) {
           rawInput = rawInput.toLowerCase();
