@@ -80,7 +80,7 @@ public class App
               JSONObject o = (JSONObject) pyramidJSONArray.get(i);
       
               // parse the json object
-              Integer id = Integer.parseInt(((JSONObject) pyramidJSONArray.get(i)).get("id").toString());
+              Integer id = Integer.parseInt(o.get("id").toString()); 
               String name = o.get("name").toString();
               JSONArray contributorsJSONArray = (JSONArray) o.get("contributors");
               
@@ -95,7 +95,10 @@ public class App
               // add a new pyramid to array
               Pyramid p = new Pyramid(id, name, contributors);
               pyramidArray[i] = p;
-          }
+
+              // add the pyramid to the map
+              pyramidMap.put(id, p);
+            }
       }
       
 
@@ -148,7 +151,7 @@ public class App
              displaySpecificPyramid(scan);
             break;
           case '5':
-             displayRequestedPyramids(scan);
+              displayRequestedPyramids();
             break;
           case 'q':
             System.out.println("Thank you for using Nassef's Egyptian Pyramid App!");
@@ -172,13 +175,14 @@ public class App
       }
 
       //print the list fo all pyramids
-      private void printAllPyramids(){
-         for(Pyramid pyramid : pyramidMap.values()){
+      private void printAllPyramids() {
+        for (Pyramid pyramid : pyramidMap.values()) {
             System.out.println("----------------------------------------------------------");
             pyramid.print();
-            System.out.println("----------------------------------------------------------"); 
-         }
-      }
+            System.out.println("----------------------------------------------------------");
+        }
+    }
+      
 
       //display a spcecific Pharaoh that was requested from the user
       private void displaySpecificPharaoh(Scanner scan){
@@ -212,19 +216,24 @@ public class App
         }
 
         //displays a list of requested pyramids
-        private void displayRequestedPyramids(Scanner scan){
-            //creating a set for requested pyramids
-            Set<Integer> requestedPyramidIDS = new HashSet<>();
+        private Set<Integer> requestedPyramidIDs = new HashSet<>();
 
+// Your existing displayRequestedPyramids method
+private void displayRequestedPyramids() {
+    System.out.println("----------------------------------------------------------");
+    for (Integer pyramidID : requestedPyramidIDs) {
+        if (pyramidMap.containsKey(pyramidID)) {
+            Pyramid requestedPyramid = pyramidMap.get(pyramidID);
+            requestedPyramid.print();
             System.out.println("----------------------------------------------------------");
-            for (Integer pyramidID : requestedPyramidIDS){
-                if (pyramidMap.containsKey(pyramidID)){
-                    Pyramid requestedPyramid = pyramidMap.get(pyramidID);
-                    requestedPyramid.print();
-                    System.out.println("----------------------------------------------------------");
-                }
-                }
-            }
+        } else {
+            System.out.println("Pyramid with ID " + pyramidID + " not found.");
+        }
+    }
+}
+
+
+      
         
 
 
