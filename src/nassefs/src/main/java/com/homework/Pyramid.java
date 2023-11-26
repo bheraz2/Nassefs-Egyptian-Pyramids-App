@@ -22,7 +22,9 @@ public class Pyramid {
     System.out.println("Pyramid ID: " + id);
     System.out.println("Name: " + name);
     System.out.println("Contributors: ");
-
-    for (String contributor )
+    
+    for (String contributor : contributors){
+      System.out.println("Contributor" + ":" + contributor);
+    }
   }
 }

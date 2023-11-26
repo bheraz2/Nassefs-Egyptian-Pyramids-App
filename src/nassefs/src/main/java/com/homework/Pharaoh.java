@@ -26,9 +26,9 @@ public class Pharaoh {
 
     public void print(){
         System.out.println("Pharaoh ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Reign Period: " + begin + " - " + end);
-        System.out.println("Contribution: " + contribution);
+        System.out.println("Name: Pharaoh " + name);
+        System.out.println("Reign Period: " + begin + " B.C - " + end + " B.C");
+        System.out.println("Contribution: " + contribution + " gold coins.");
         System.out.println("Hieroglyphic: " + hieroglyphic);
     }
 }

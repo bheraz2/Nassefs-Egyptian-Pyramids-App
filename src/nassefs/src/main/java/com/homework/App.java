@@ -110,6 +110,7 @@ public class App
             printMenu();
             command = menuGetCommand(scan);
             executeCommand(scan, command);
+            
 
         }
     }
@@ -157,7 +158,10 @@ public class App
             System.out.println("Thank you for using Nassef's Egyptian Pyramid App!");
             break;
           default:
-            System.out.println("ERROR: Unknown commmand");
+           if(!Character.isLetter(command) || command == 'q'){
+            System.out.println("Error: Unknown Commamnd");
+           }
+          
             success = false;
         }
     
@@ -194,6 +198,7 @@ public class App
             System.out.println("----------------------------------------------------------");
             specificPharaoh.print();
             System.out.println("----------------------------------------------------------");
+            scan.nextInt();
         }else{
             System.out.println("Pharaoh with ID" + pharaohID + "not found.");
         }
@@ -209,33 +214,42 @@ public class App
                 System.out.println("----------------------------------------------------------");
                 specificPyramid.print();
                  System.out.println("----------------------------------------------------------");
-
+                 scan.nextLine();
+                 //Specific pyramid adds to the list
+                  requestedPyramidIDs.add(pyramidID);
             }else{
                 System.out.println("Pyramid with ID" + pyramidID + "not found.");
             }
         }
 
-        //displays a list of requested pyramids
-        private Set<Integer> requestedPyramidIDs = new HashSet<>();
-
-// Your existing displayRequestedPyramids method
-private void displayRequestedPyramids() {
-    System.out.println("----------------------------------------------------------");
-    for (Integer pyramidID : requestedPyramidIDs) {
-        if (pyramidMap.containsKey(pyramidID)) {
-            Pyramid requestedPyramid = pyramidMap.get(pyramidID);
-            requestedPyramid.print();
-            System.out.println("----------------------------------------------------------");
-        } else {
-            System.out.println("Pyramid with ID " + pyramidID + " not found.");
-        }
-    }
-}
-
-
-      
+        
         
 
+
+        private Set<Integer> requestedPyramidIDs = new HashSet<>();
+
+        // Other methods...
+    
+        // Display all requested pyramids
+        private void displayRequestedPyramids() {
+            System.out.println("----------------------------------------------------------");
+    
+            // Check if there are any requested pyramids
+            if (requestedPyramidIDs.isEmpty()) {
+                System.out.println("No requested pyramids found.");
+            } else {
+              System.out.println("List of Requested Pyramids");
+                for (Integer pyramidID : requestedPyramidIDs) {
+                    if (pyramidMap.containsKey(pyramidID)) {
+                        Pyramid requestedPyramid = pyramidMap.get(pyramidID);
+                        requestedPyramid.print();
+                        System.out.println("----------------------------------------------------------");
+                    } else {
+                        System.out.println("Pyramid with ID " + pyramidID + " not found.");
+                    }
+                }
+            }
+        }
 
 
       private static Character menuGetCommand(Scanner scan) {
@@ -248,6 +262,9 @@ private void displayRequestedPyramids() {
           rawInput = rawInput.toLowerCase();
           command = rawInput.charAt(0);
         }
+        
+        
+        
     
         return command;
       }
