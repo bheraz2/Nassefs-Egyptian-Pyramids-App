@@ -31,5 +31,19 @@ public class Pharaoh {
         System.out.println("Contribution: " + contribution + " gold coins.");
         System.out.println("Hieroglyphic: " + hieroglyphic);
     }
+
+    public int getContribution() {
+        return contribution;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getHieroglyphic() {
+        return hieroglyphic;
+    }
 }
+
+
 
